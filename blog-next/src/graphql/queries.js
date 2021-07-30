@@ -25,6 +25,7 @@ const getHomePage = gql`
           ... on ComponentSharedLink {
             text
             href
+            id
           }
         }
         logo {

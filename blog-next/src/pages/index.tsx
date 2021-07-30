@@ -4,7 +4,7 @@ import Header from '../components/header';
 
 import { getHomePosts, getHomePage } from '../graphql/queries';
 
-import styles from '../styles/Home.module.css';
+import styles from './styles.module.scss';
 
 type Post = {
   title: string;
@@ -16,7 +16,9 @@ type Post = {
 };
 
 type Link = {
-  link: string;
+  text: string;
+  href: string;
+  id: string;
 };
 
 interface IndexProps {
@@ -42,13 +44,7 @@ export default function Home({ posts, homePageLayout }: IndexProps) {
       <Header navBar={homePageLayout.navBar} />
       <h1>Hello world</h1>
 
-      {posts.map((post) => (
-        <div>
-          <h1>{post.title}</h1>
-          <p>{post.intro}</p>
-          <p>{post.banner.url}</p>
-        </div>
-      ))}
+      <section className={styles.body}></section>
     </>
   );
 }
