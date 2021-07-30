@@ -44,13 +44,18 @@ interface IndexProps {
 
 export default function Home({ posts, homePageLayout }: IndexProps) {
   const apiUrl = process.env.STRAPI_API;
-  const formattedBannerDate = new Date(
+
+  const formateDate = (date) => {
+    return new Date(date).toLocaleDateString('pt-BR', {
+      day: '2-digit',
+      month: 'long',
+      year: 'numeric',
+    });
+  };
+
+  const formattedBannerDate = formateDate(
     homePageLayout.banner.blog_post.published_at
-  ).toLocaleDateString('pt-BR', {
-    day: '2-digit',
-    month: 'long',
-    year: 'numeric',
-  });
+  );
 
   return (
     <>
@@ -73,6 +78,22 @@ export default function Home({ posts, homePageLayout }: IndexProps) {
             <p>{homePageLayout.banner.blog_post.intro}</p>
             <time>{formattedBannerDate}</time>
           </div>
+        </section>
+
+        <section className={styles.posts}>
+          {posts.map((post) => (
+            <div className={styles.post} key={post.title}>
+              <img src={`${apiUrl}${post.banner.url}`} alt='' />
+              <div className={styles.tags}>
+                {post.tags.map((tag) => (
+                  <Tag tag={tag.tag} key={tag.tag} />
+                ))}
+              </div>
+              <h3>{post.title}</h3>
+              <p>{post.intro}</p>
+              <time>{formateDate(post.published_at)}</time>
+            </div>
+          ))}
         </section>
       </main>
     </>

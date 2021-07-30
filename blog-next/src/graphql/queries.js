@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client';
 
-export { getHomePosts, getHomePage, getHeader };
+export { getHomePosts, getHomePage, getHeader, getNavbar };
 
 const getHomePosts = gql`
   query {
@@ -9,6 +9,11 @@ const getHomePosts = gql`
         title
         intro
         published_at
+        tags {
+          ... on Tags {
+            tag
+          }
+        }
         banner {
           url
         }
@@ -71,6 +76,21 @@ const getHeader = gql`
         logo {
           ... on UploadFile {
             url
+          }
+        }
+      }
+    }
+  }
+`;
+
+const getNavbar = gql`
+  query {
+    homePage {
+      navBar {
+        links {
+          ... on ComponentSharedLink {
+            text
+            text
           }
         }
       }
