@@ -1,0 +1,50 @@
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.banner {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  img {
+    max-width: 800px;
+    // min-width: 400px;
+    width: 100%;
+    border-radius: 10px;
+  }
+
+  .postInfo {
+    max-width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    div {
+      margin-bottom: 0.5rem;
+    }
+
+    h3 {
+      font-size: 1.125rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      color: var(--gray-700);
+      margin-bottom: 0.5rem;
+    }
+
+    time {
+      color: var(--gray-300);
+      font-size: 0.8rem;
+    }
+  }
+
+  .tags {
+    display: flex;
+    gap: 0.5rem;
+    font-weight: bold;
+  }
+}

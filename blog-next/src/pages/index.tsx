@@ -1,15 +1,21 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 import { GetStaticProps } from 'next';
+import Tag from '../components/colorizeTag';
 import Header from '../components/header';
 
 import { getHomePosts, getHomePage } from '../graphql/queries';
 
 import styles from './styles.module.scss';
 
+type Tag = {
+  tag: string;
+};
+
 type Post = {
   title: string;
   intro: string;
   published_at: string;
+  tags: Tag[];
   banner: {
     url: string;
   };
@@ -38,13 +44,37 @@ interface IndexProps {
 
 export default function Home({ posts, homePageLayout }: IndexProps) {
   const apiUrl = process.env.STRAPI_API;
+  const formattedBannerDate = new Date(
+    homePageLayout.banner.blog_post.published_at
+  ).toLocaleDateString('pt-BR', {
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric',
+  });
 
   return (
     <>
       <Header navBar={homePageLayout.navBar} />
-      <h1>Hello world</h1>
+      <main className={styles.container}>
+        <section className={styles.banner}>
+          <img
+            src={`${apiUrl}${homePageLayout.banner.blog_post.banner.url}`}
+            alt=''
+          />
+          <div className={styles.postInfo}>
+            <div className={styles.tags}>
+              {homePageLayout.banner.blog_post.tags.map((tag) => (
+                <Tag tag={tag.tag} key={tag.tag} />
+              ))}
+            </div>
 
-      <section className={styles.body}></section>
+            <h3>{homePageLayout.banner.blog_post.title}</h3>
+
+            <p>{homePageLayout.banner.blog_post.intro}</p>
+            <time>{formattedBannerDate}</time>
+          </div>
+        </section>
+      </main>
     </>
   );
 }
@@ -63,9 +93,13 @@ export const getStaticProps: GetStaticProps = async () => {
     query: getHomePage,
   });
 
+  const banner: Post = homePageData.data.homePage.content.filter(
+    (item) => item.__typename === 'ComponentHomeBanner'
+  )[0];
+
   const homePageLayout = {
     navBar: homePageData.data.homePage.navBar,
-    banner: homePageData.data.homePage.content[0], // banner
+    banner,
   };
 
   return {

@@ -36,10 +36,16 @@ const getHomePage = gql`
       }
       content {
         ... on ComponentHomeBanner {
+          __typename
           blog_post {
             title
             intro
-            created_at
+            published_at
+            tags {
+              ... on Tags {
+                tag
+              }
+            }
             banner {
               ... on UploadFile {
                 url

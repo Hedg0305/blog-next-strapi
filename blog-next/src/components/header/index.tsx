@@ -19,7 +19,6 @@ type Link = {
 
 const Header = ({ navBar }: HeaderProps) => {
   const apiUrl = process.env.STRAPI_API;
-  console.log(navBar);
   const img = navBar.logo.url.replace('manuel', 'thumbnail_manuel');
 
   return (

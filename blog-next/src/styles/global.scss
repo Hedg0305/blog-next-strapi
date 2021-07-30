@@ -5,7 +5,7 @@
 }
 
 :root {
-  --gray-300: #a8a8b3;
+  --gray-300: #8f8f9b;
   --gray-700: #323238;
 
   --orange: #ff785d;
@@ -17,6 +17,7 @@ textarea,
 select,
 button {
   font: 400 1rem 'Roboto', sans-serif;
+  background: #f0f0f0;
 }
 
 button {
