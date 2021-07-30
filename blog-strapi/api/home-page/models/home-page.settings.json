@@ -1,0 +1,26 @@
+{
+  "kind": "singleType",
+  "collectionName": "home_pages",
+  "info": {
+    "name": "home-page"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "navBar": {
+      "type": "component",
+      "repeatable": false,
+      "component": "global.nav-bar"
+    },
+    "content": {
+      "type": "dynamiczone",
+      "components": [
+        "home.banner"
+      ]
+    }
+  }
+}
