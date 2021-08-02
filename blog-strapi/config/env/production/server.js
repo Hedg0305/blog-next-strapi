@@ -1,3 +1,3 @@
 module.exports = ({ env }) => ({
-  url: env("MY_HEROKU_URL"),
+  url: env("https://git.heroku.com/sheltered-castle-85879.git"),
 });
