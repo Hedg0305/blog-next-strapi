@@ -13,22 +13,22 @@ interface HeaderProps {
 
 type Link = {
   text: string;
-  href: string;
-  id: string;
 };
 
 const Header = ({ navBar }: HeaderProps) => {
-  const apiUrl = process.env.STRAPI_API;
+  const apiUrl = process.env.NEXT_PUBLIC_STRAPI_API;
   const img = navBar.logo.url.replace('manuel', 'thumbnail_manuel');
 
   return (
     <nav className={styles.navBar}>
-      <img src={`${apiUrl}${img}`} alt='' />
+      <Link href='/'>
+        <img src={`${apiUrl}${img}`} alt='' />
+      </Link>
       <div>
         <ul>
           {navBar.links.map((link) => (
-            <li key={link.id}>
-              <Link href={link.href} key={link.id}>
+            <li key={link.text}>
+              <Link href={`/category/${link.text.toLocaleLowerCase()}`}>
                 <a>{link.text}</a>
               </Link>
             </li>

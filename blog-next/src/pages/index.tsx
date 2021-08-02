@@ -3,7 +3,7 @@ import { GetStaticProps } from 'next';
 import Tag from '../components/colorizeTag';
 import Header from '../components/header';
 
-import { getHomePosts, getHomePage } from '../graphql/queries';
+import { getHomePage } from '../graphql/queries';
 
 import styles from './styles.module.scss';
 
@@ -43,7 +43,7 @@ interface IndexProps {
 }
 
 export default function Home({ posts, homePageLayout }: IndexProps) {
-  const apiUrl = process.env.STRAPI_API;
+  const apiUrl = process.env.NEXT_PUBLIC_STRAPI_API;
 
   const formateDate = (date) => {
     return new Date(date).toLocaleDateString('pt-BR', {
@@ -106,26 +106,22 @@ export const getStaticProps: GetStaticProps = async () => {
     cache: new InMemoryCache(),
   });
 
-  const blogPostsData = await client.query({
-    query: getHomePosts,
-  });
-
-  const homePageData = await client.query({
+  const { data } = await client.query({
     query: getHomePage,
   });
 
-  const banner: Post = homePageData.data.homePage.content.filter(
+  const banner = data.homePage.content.filter(
     (item) => item.__typename === 'ComponentHomeBanner'
   )[0];
 
   const homePageLayout = {
-    navBar: homePageData.data.homePage.navBar,
+    navBar: data.navBar.nav,
     banner,
   };
 
   return {
     props: {
-      posts: blogPostsData.data.blogPosts,
+      posts: data.blogPosts,
       homePageLayout,
     },
   };

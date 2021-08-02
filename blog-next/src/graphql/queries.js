@@ -1,20 +1,15 @@
 import { gql } from '@apollo/client';
 
-export { getHomePosts, getHomePage, getHeader, getNavbar };
+export { getHomePage, getNavBar, filterByTag };
 
-const getHomePosts = gql`
+const getNavBar = gql`
   query {
-    blogPosts {
-      ... on BlogPost {
-        title
-        intro
-        published_at
-        tags {
-          ... on Tags {
-            tag
-          }
+    navBar {
+      nav {
+        links {
+          text
         }
-        banner {
+        logo {
           url
         }
       }
@@ -24,75 +19,57 @@ const getHomePosts = gql`
 
 const getHomePage = gql`
   query {
-    homePage {
-      navBar {
+    navBar {
+      nav {
         links {
-          ... on ComponentSharedLink {
-            text
-            href
-            id
-          }
+          text
         }
         logo {
-          ... on UploadFile {
-            url
-          }
+          url
         }
       }
+    }
+    homePage {
       content {
         ... on ComponentHomeBanner {
-          __typename
           blog_post {
             title
             intro
             published_at
-            tags {
-              ... on Tags {
-                tag
-              }
-            }
             banner {
-              ... on UploadFile {
-                url
-              }
+              url
+            }
+            tags {
+              tag
             }
           }
         }
       }
     }
-  }
-`;
-
-const getHeader = gql`
-  query {
-    homePage {
-      navBar {
-        links {
-          ... on ComponentSharedLink {
-            text
-            href
-          }
-        }
-        logo {
-          ... on UploadFile {
-            url
-          }
-        }
+    blogPosts(limit: 10) {
+      title
+      intro
+      published_at
+      banner {
+        url
+      }
+      tags {
+        tag
       }
     }
   }
 `;
 
-const getNavbar = gql`
-  query {
-    homePage {
-      navBar {
-        links {
-          ... on ComponentSharedLink {
-            text
-            text
-          }
-        }
+const filterByTag = gql`
+  query filterByTag($tag: String!) {
+    blogPosts(where: { tags: { tag_contains: $tag } }) {
+      title
+      intro
+      banner {
+        url
+      }
+      tags {
+        tag
       }
     }
   }

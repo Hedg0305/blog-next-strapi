@@ -9,7 +9,7 @@ interface TagProps {
 
 const Tag = ({ tag }: TagProps) => {
   return (
-    <Link href={`${tag.toLocaleLowerCase()}`}>
+    <Link href={`/category/${tag.toLocaleLowerCase()}`}>
       <a
         className={
           tag === 'Games'

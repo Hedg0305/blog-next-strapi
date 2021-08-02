@@ -1,8 +1,8 @@
 {
   "kind": "singleType",
-  "collectionName": "home_pages",
+  "collectionName": "nav_bars",
   "info": {
-    "name": "home-page",
+    "name": "navBar",
     "description": ""
   },
   "options": {
@@ -12,11 +12,10 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "content": {
-      "type": "dynamiczone",
-      "components": [
-        "home.banner"
-      ]
+    "nav": {
+      "type": "component",
+      "repeatable": false,
+      "component": "global.nav-bar"
     }
   }
 }
