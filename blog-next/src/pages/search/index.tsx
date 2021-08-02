@@ -1,11 +1,11 @@
-import { GetStaticPaths, GetStaticProps } from 'next';
 import { ApolloClient, InMemoryCache } from '@apollo/client';
-import { filterByTag, getNavBar } from '../../graphql/queries';
-
+import { GetServerSideProps } from 'next';
+import React from 'react';
+import Tag from '../../components/colorizeTag';
 import Header from '../../components/header';
+import { filterByTitle, getNavBar } from '../../graphql/queries';
 
 import styles from './styles.module.scss';
-import Tag from '../../components/colorizeTag';
 
 type Tag = {
   tag: string;
@@ -14,28 +14,28 @@ type Tag = {
 type Post = {
   title: string;
   intro: string;
+  published_at: string;
+  tags: Tag[];
   banner: {
     url: string;
   };
-  tags: Tag[];
-  published_at: string;
 };
 
 type Link = {
   text: string;
 };
 
-interface categoryProps {
-  posts: Post[];
+interface SearchProps {
   navBar: {
-    logo: {
-      url;
-    };
     links: Link[];
+    logo: {
+      url: string;
+    };
   };
+  posts: Post[];
 }
 
-const Category = ({ posts, navBar }: categoryProps) => {
+const Search = ({ navBar, posts }: SearchProps) => {
   const apiUrl = process.env.NEXT_PUBLIC_STRAPI_API;
 
   const formateDate = (date) => {
@@ -49,7 +49,7 @@ const Category = ({ posts, navBar }: categoryProps) => {
   return (
     <>
       <Header navBar={navBar} />
-      <div className={styles.container}>
+      <main className={styles.container}>
         {posts.length ? (
           posts.map((post) => (
             <div className={styles.post} key={post.title}>
@@ -67,43 +67,34 @@ const Category = ({ posts, navBar }: categoryProps) => {
         ) : (
           <h1>Nenhum poste referente a essa categoria!</h1>
         )}
-      </div>
+      </main>
     </>
   );
 };
 
-export default Category;
+export default Search;
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  return {
-    paths: [],
-    fallback: 'blocking',
-  };
-};
-
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const { slug } = params;
-
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const client = new ApolloClient({
     uri: process.env.NEXT_PUBLIC_STRAPI_GRAPHQL,
     cache: new InMemoryCache(),
   });
 
   const { data } = await client.query({
-    query: filterByTag,
-    variables: {
-      tag: slug,
-    },
+    query: getNavBar,
   });
 
-  const navBar = await client.query({
-    query: getNavBar,
+  const postsData = await client.query({
+    query: filterByTitle,
+    variables: {
+      title: query.q,
+    },
   });
 
   return {
     props: {
-      posts: data.blogPosts,
-      navBar: navBar.data.navBar.nav,
+      navBar: data.navBar.nav,
+      posts: postsData.data.blogPosts,
     },
   };
 };

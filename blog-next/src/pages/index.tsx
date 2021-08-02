@@ -102,7 +102,7 @@ export default function Home({ posts, homePageLayout }: IndexProps) {
 
 export const getStaticProps: GetStaticProps = async () => {
   const client = new ApolloClient({
-    uri: process.env.STRAPI_GRAPHQL,
+    uri: process.env.NEXT_PUBLIC_STRAPI_GRAPHQL,
     cache: new InMemoryCache(),
   });
 

@@ -1,6 +1,8 @@
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 
 import styles from './styles.module.scss';
+import { useState } from 'react';
 
 interface HeaderProps {
   navBar: {
@@ -18,6 +20,18 @@ type Link = {
 const Header = ({ navBar }: HeaderProps) => {
   const apiUrl = process.env.NEXT_PUBLIC_STRAPI_API;
   const img = navBar.logo.url.replace('manuel', 'thumbnail_manuel');
+  const router = useRouter();
+  const [query, setQuery] = useState('');
+
+  const handleParam = (setValue) => (e) => setValue(e.target.value);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    router.push({
+      pathname: '/search',
+      query: { q: query },
+    });
+  };
 
   return (
     <nav className={styles.navBar}>
@@ -26,6 +40,19 @@ const Header = ({ navBar }: HeaderProps) => {
           <img src={`${apiUrl}${img}`} alt='' />
         </a>
       </Link>
+
+      <form onSubmit={handleSubmit}>
+        <input
+          type='text'
+          name='title'
+          id='title'
+          value={query}
+          onChange={handleParam(setQuery)}
+          placeholder='Search'
+        />
+        <button type='submit'>Search</button>
+      </form>
+
       <div>
         <ul>
           {navBar.links.map((link) => (
