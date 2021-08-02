@@ -2,6 +2,7 @@ import { ApolloClient, InMemoryCache } from '@apollo/client';
 import { GetStaticProps } from 'next';
 import Tag from '../components/colorizeTag';
 import Header from '../components/header';
+import Image from 'next/image';
 
 import { getHomePage } from '../graphql/queries';
 
@@ -62,9 +63,11 @@ export default function Home({ posts, homePageLayout }: IndexProps) {
       <Header navBar={homePageLayout.navBar} />
       <main className={styles.container}>
         <section className={styles.banner}>
-          <img
+          <Image
             src={`${apiUrl}${homePageLayout.banner.blog_post.banner.url}`}
             alt=''
+            width={500}
+            height={500}
           />
           <div className={styles.postInfo}>
             <div className={styles.tags}>
@@ -83,7 +86,12 @@ export default function Home({ posts, homePageLayout }: IndexProps) {
         <section className={styles.posts}>
           {posts.map((post) => (
             <div className={styles.post} key={post.title}>
-              <img src={`${apiUrl}${post.banner.url}`} alt='' />
+              <Image
+                src={`${apiUrl}${post.banner.url}`}
+                alt=''
+                width={500}
+                height={500}
+              />
               <div className={styles.tags}>
                 {post.tags.map((tag) => (
                   <Tag tag={tag.tag} key={tag.tag} />

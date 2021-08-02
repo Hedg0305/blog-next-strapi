@@ -3,6 +3,7 @@ import Link from 'next/link';
 
 import styles from './styles.module.scss';
 import { useState } from 'react';
+import Image from 'next/image';
 
 interface HeaderProps {
   navBar: {
@@ -37,7 +38,7 @@ const Header = ({ navBar }: HeaderProps) => {
     <nav className={styles.navBar}>
       <Link href='/'>
         <a>
-          <img src={`${apiUrl}${img}`} alt='' />
+          <Image src={`${apiUrl}${img}`} alt='Logo' width={900} height={900} />
         </a>
       </Link>
 

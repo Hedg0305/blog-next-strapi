@@ -4,6 +4,7 @@ import React from 'react';
 import Tag from '../../components/colorizeTag';
 import Header from '../../components/header';
 import { filterByTitle, getNavBar } from '../../graphql/queries';
+import Image from 'next/image';
 
 import styles from './styles.module.scss';
 
@@ -53,7 +54,12 @@ const Search = ({ navBar, posts }: SearchProps) => {
         {posts.length ? (
           posts.map((post) => (
             <div className={styles.post} key={post.title}>
-              <img src={`${apiUrl}${post.banner.url}`} alt='' />
+              <Image
+                src={`${apiUrl}${post.banner.url}`}
+                alt=''
+                width={500}
+                height={500}
+              />
               <div>
                 <h3>{post.title}</h3>
                 <p>{post.intro.substring(0, 200)}...</p>
