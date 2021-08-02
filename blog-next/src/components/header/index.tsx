@@ -22,7 +22,9 @@ const Header = ({ navBar }: HeaderProps) => {
   return (
     <nav className={styles.navBar}>
       <Link href='/'>
-        <img src={`${apiUrl}${img}`} alt='' />
+        <a>
+          <img src={`${apiUrl}${img}`} alt='' />
+        </a>
       </Link>
       <div>
         <ul>

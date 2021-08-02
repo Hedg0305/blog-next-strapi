@@ -65,6 +65,7 @@ const filterByTag = gql`
     blogPosts(where: { tags: { tag_contains: $tag } }) {
       title
       intro
+      published_at
       banner {
         url
       }

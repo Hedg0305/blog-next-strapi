@@ -1,0 +1,37 @@
+.container {
+  max-width: 1120px;
+  padding: 0 1rem;
+  margin: 0 auto;
+
+  .post {
+    display: flex;
+    align-items: center;
+
+    img {
+      max-width: 35%;
+      margin-right: 0.5rem;
+    }
+
+    & > div {
+      max-width: 75%;
+    }
+
+    & + .post {
+      margin-top: 0.5rem;
+      padding-top: 0.5rem;
+      border-top: 1px dotted var(--gray-300);
+    }
+
+    time {
+      color: var(--gray-300);
+      display: block;
+    }
+    a {
+      display: inline-block;
+
+      & + a {
+        margin-left: 0.5rem;
+      }
+    }
+  }
+}

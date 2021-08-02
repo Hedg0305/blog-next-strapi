@@ -1,7 +1,15 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 import { filterByTag, getNavBar } from '../../graphql/queries';
+
 import Header from '../../components/header';
+
+import styles from './styles.module.scss';
+import Tag from '../../components/colorizeTag';
+
+type Tag = {
+  tag: string;
+};
 
 type Post = {
   title: string;
@@ -9,9 +17,8 @@ type Post = {
   banner: {
     url: string;
   };
-  tags: {
-    tag: string;
-  };
+  tags: Tag[];
+  published_at: string;
 };
 
 type Link = {
@@ -29,9 +36,38 @@ interface categoryProps {
 }
 
 const Category = ({ posts, navBar }: categoryProps) => {
+  const apiUrl = process.env.NEXT_PUBLIC_STRAPI_API;
+
+  const formateDate = (date) => {
+    return new Date(date).toLocaleDateString('pt-BR', {
+      day: '2-digit',
+      month: 'long',
+      year: 'numeric',
+    });
+  };
+
   return (
     <>
       <Header navBar={navBar} />
+      <div className={styles.container}>
+        {posts.length ? (
+          posts.map((post) => (
+            <div className={styles.post}>
+              <img src={`${apiUrl}${post.banner.url}`} alt='' />
+              <div>
+                <h3>{post.title}</h3>
+                <p>{post.intro.substring(0, 200)}...</p>
+                <time>{formateDate(post.published_at)}</time>
+                {post.tags.map((tag) => (
+                  <Tag tag={tag.tag} key={tag.tag} />
+                ))}
+              </div>
+            </div>
+          ))
+        ) : (
+          <h1>Nenhum poste referente a essa categoria!</h1>
+        )}
+      </div>
     </>
   );
 };
@@ -66,7 +102,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   return {
     props: {
-      posts: data,
+      posts: data.blogPosts,
       navBar: navBar.data.navBar.nav,
     },
   };
