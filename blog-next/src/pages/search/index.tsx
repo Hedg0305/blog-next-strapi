@@ -58,6 +58,7 @@ const Search = ({ navBar, posts }: SearchProps) => {
                 <h3>{post.title}</h3>
                 <p>{post.intro.substring(0, 200)}...</p>
                 <time>{formateDate(post.published_at)}</time>
+
                 {post.tags.map((tag) => (
                   <Tag tag={tag.tag} key={tag.tag} />
                 ))}
@@ -65,7 +66,7 @@ const Search = ({ navBar, posts }: SearchProps) => {
             </div>
           ))
         ) : (
-          <h1>Nenhum poste referente a essa categoria!</h1>
+          <h1>Nenhum poste com este título!</h1>
         )}
       </main>
     </>
