@@ -4,11 +4,18 @@ import Link from 'next/link';
 import styles from './styles.module.scss';
 import { useState } from 'react';
 
+type Formats = {
+  thumbnail: {
+    url: string;
+  };
+};
+
 interface HeaderProps {
   navBar: {
     links: Link[];
     logo: {
       url: string;
+      formats: Formats;
     };
   };
 }
@@ -22,6 +29,7 @@ const Header = ({ navBar }: HeaderProps) => {
   const img = navBar.logo.url.replace('manuel', 'thumbnail_manuel');
   const router = useRouter();
   const [query, setQuery] = useState('');
+  console.log(navBar.logo.formats.thumbnail.url);
 
   const handleParam = (setValue) => (e) => setValue(e.target.value);
 
@@ -37,7 +45,7 @@ const Header = ({ navBar }: HeaderProps) => {
     <nav className={styles.navBar}>
       <Link href='/'>
         <a>
-          <img src={`${apiUrl}${img}`} alt='' />
+          <img src={`${apiUrl}${navBar.logo.formats.thumbnail.url}`} alt='' />
         </a>
       </Link>
 

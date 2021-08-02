@@ -11,6 +11,7 @@ const getNavBar = gql`
         }
         logo {
           url
+          formats
         }
       }
     }
