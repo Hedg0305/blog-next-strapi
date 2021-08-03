@@ -66,7 +66,7 @@ export default function Home({ posts, homePageLayout }: IndexProps) {
           <Image
             src={`${apiUrl}${homePageLayout.banner.blog_post.banner.url}`}
             alt=''
-            width={500}
+            width={750}
             height={500}
           />
           <div className={styles.postInfo}>
@@ -89,7 +89,7 @@ export default function Home({ posts, homePageLayout }: IndexProps) {
               <Image
                 src={`${apiUrl}${post.banner.url}`}
                 alt=''
-                width={500}
+                width={700}
                 height={500}
               />
               <div className={styles.tags}>
@@ -132,5 +132,6 @@ export const getStaticProps: GetStaticProps = async () => {
       posts: data.blogPosts,
       homePageLayout,
     },
+    revalidate: 60 * 5
   };
 };
