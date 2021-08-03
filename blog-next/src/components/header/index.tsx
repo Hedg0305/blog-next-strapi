@@ -34,8 +34,6 @@ const Header = ({ navBar }: HeaderProps) => {
     });
   };
 
-  console.log(router.asPath);
-
   return (
     <nav className={styles.navBar}>
       <Link href='/'>
@@ -67,10 +65,7 @@ const Header = ({ navBar }: HeaderProps) => {
                   : ''
               }
             >
-              <Link
-                href={`/category/${link.text.toLocaleLowerCase()}`}
-                prefetch
-              >
+              <Link href={`/category/${link.text.toLocaleLowerCase()}`}>
                 <a>{link.text}</a>
               </Link>
             </li>

@@ -1,8 +1,6 @@
 import { gql } from '@apollo/client';
 
-export { getHomePage, getNavBar, filterByTag, filterByTitle };
-
-const getNavBar = gql`
+export const getNavBar = gql`
   query {
     navBar {
       nav {
@@ -18,7 +16,7 @@ const getNavBar = gql`
   }
 `;
 
-const getHomePage = gql`
+export const getHomePage = gql`
   query {
     navBar {
       nav {
@@ -61,7 +59,7 @@ const getHomePage = gql`
   }
 `;
 
-const filterByTag = gql`
+export const filterByTag = gql`
   query filterByTag($tag: String!) {
     blogPosts(where: { tags: { tag_contains: $tag } }) {
       title
@@ -77,7 +75,7 @@ const filterByTag = gql`
   }
 `;
 
-const filterByTitle = gql`
+export const filterByTitle = gql`
   query filterByTitle($title: String!) {
     blogPosts(where: { title_contains: $title }) {
       title
@@ -88,6 +86,20 @@ const filterByTitle = gql`
       }
       tags {
         tag
+      }
+    }
+  }
+`;
+
+export const createAccount = gql`
+  mutation ($username: String!, $email: String!, $password: String!) {
+    register(
+      input: { username: $username, email: $email, password: $password }
+    ) {
+      jwt
+      user {
+        username
+        email
       }
     }
   }

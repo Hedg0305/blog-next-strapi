@@ -58,6 +58,8 @@ export default function Home({ posts, homePageLayout }: IndexProps) {
     homePageLayout.banner.blog_post.published_at
   );
 
+  console.log(homePageLayout.banner.blog_post.banner.url);
+
   return (
     <>
       <Header navBar={homePageLayout.navBar} />
