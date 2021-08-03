@@ -6,10 +6,10 @@
   .post {
     display: flex;
     align-items: center;
+    gap: 1rem;
 
     img {
       max-width: 35%;
-      margin-right: 0.5rem;
     }
 
     & > div {

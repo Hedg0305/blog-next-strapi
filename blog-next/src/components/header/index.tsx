@@ -38,7 +38,7 @@ const Header = ({ navBar }: HeaderProps) => {
     <nav className={styles.navBar}>
       <Link href='/'>
         <a>
-          <Image src={`${apiUrl}${img}`} alt='Logo' width={900} height={900} />
+          <Image src={`${apiUrl}${img}`} alt='Logo' width={350} height={200} />
         </a>
       </Link>
 
