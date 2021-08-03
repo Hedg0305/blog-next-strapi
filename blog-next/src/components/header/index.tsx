@@ -67,7 +67,10 @@ const Header = ({ navBar }: HeaderProps) => {
                   : ''
               }
             >
-              <Link href={`/category/${link.text.toLocaleLowerCase()}`}>
+              <Link
+                href={`/category/${link.text.toLocaleLowerCase()}`}
+                prefetch
+              >
                 <a>{link.text}</a>
               </Link>
             </li>

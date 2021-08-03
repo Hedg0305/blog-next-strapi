@@ -39,7 +39,7 @@ interface SearchProps {
 const Search = ({ navBar, posts }: SearchProps) => {
   const apiUrl = process.env.NEXT_PUBLIC_STRAPI_API;
 
-  const formateDate = (date) => {
+  const formateDate = (date: string) => {
     return new Date(date).toLocaleDateString('pt-BR', {
       day: '2-digit',
       month: 'long',
