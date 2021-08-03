@@ -98,7 +98,7 @@ export default function Home({ posts, homePageLayout }: IndexProps) {
                 ))}
               </div>
               <h3>{post.title}</h3>
-              <p>{post.intro}</p>
+              <p>{post.intro.substring(0, 200)}...</p>
               <time>{formateDate(post.published_at)}</time>
             </div>
           ))}
@@ -132,6 +132,6 @@ export const getStaticProps: GetStaticProps = async () => {
       posts: data.blogPosts,
       homePageLayout,
     },
-    revalidate: 60 * 5
+    revalidate: 60 * 5,
   };
 };
