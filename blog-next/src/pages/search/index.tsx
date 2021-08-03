@@ -56,8 +56,8 @@ const Search = ({ navBar, posts }: SearchProps) => {
             <div className={styles.post} key={post.title}>
               <Image
                 src={`${apiUrl}${post.banner.url}`}
-                alt=''
-                width={500}
+                alt='Banner'
+                width={800}
                 height={500}
               />
               <div>
