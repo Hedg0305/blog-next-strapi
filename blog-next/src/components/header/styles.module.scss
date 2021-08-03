@@ -20,8 +20,8 @@
       li {
         list-style: none;
 
-        a {
-          border-bottom: 2px solid var(--gray-300);
+        &.active a {
+          border-bottom: 1px solid var(--gray-300);
         }
 
         & + li {

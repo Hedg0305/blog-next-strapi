@@ -34,6 +34,8 @@ const Header = ({ navBar }: HeaderProps) => {
     });
   };
 
+  console.log(router.asPath);
+
   return (
     <nav className={styles.navBar}>
       <Link href='/'>
@@ -57,7 +59,14 @@ const Header = ({ navBar }: HeaderProps) => {
       <div>
         <ul>
           {navBar.links.map((link) => (
-            <li key={link.text}>
+            <li
+              key={link.text}
+              className={
+                router.asPath === `/category/${link.text.toLocaleLowerCase()}`
+                  ? styles.active
+                  : ''
+              }
+            >
               <Link href={`/category/${link.text.toLocaleLowerCase()}`}>
                 <a>{link.text}</a>
               </Link>
