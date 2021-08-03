@@ -71,7 +71,7 @@ const Category = ({ posts, navBar }: categoryProps) => {
             </div>
           ))
         ) : (
-          <h1>Nenhum poste referente a essa categoria!</h1>
+          <h1>No matches for this tag!</h1>
         )}
       </div>
     </>

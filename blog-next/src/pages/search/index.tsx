@@ -72,7 +72,7 @@ const Search = ({ navBar, posts }: SearchProps) => {
             </div>
           ))
         ) : (
-          <h1>Nenhum poste com este título!</h1>
+          <h1>No posts found!</h1>
         )}
       </main>
     </>
