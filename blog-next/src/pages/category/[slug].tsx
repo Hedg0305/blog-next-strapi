@@ -55,7 +55,7 @@ const Category = ({ posts, navBar }: categoryProps) => {
           posts.map((post) => (
             <div className={styles.post} key={post.title}>
               <Image
-                src={`${apiUrl}${post.banner.url}`}
+                src={`${post.banner.url}`}
                 alt=''
                 width={800}
                 height={500}

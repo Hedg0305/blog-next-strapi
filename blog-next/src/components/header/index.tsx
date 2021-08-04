@@ -19,7 +19,6 @@ type Link = {
 };
 
 const Header = ({ navBar }: HeaderProps) => {
-  const apiUrl = process.env.NEXT_PUBLIC_STRAPI_API;
   const img = navBar.logo.url.replace('manuel', 'thumbnail_manuel');
   const router = useRouter();
   const [query, setQuery] = useState('');
@@ -38,7 +37,7 @@ const Header = ({ navBar }: HeaderProps) => {
     <nav className={styles.navBar}>
       <Link href='/'>
         <a>
-          <Image src={`${apiUrl}${img}`} alt='Logo' width={350} height={200} />
+          <Image src={`${img}`} alt='Logo' width={350} height={200} />
         </a>
       </Link>
 

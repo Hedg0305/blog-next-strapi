@@ -66,7 +66,7 @@ export default function Home({ posts, homePageLayout }: IndexProps) {
       <main className={styles.container}>
         <section className={styles.banner}>
           <Image
-            src={`${apiUrl}${homePageLayout.banner.blog_post.banner.url}`}
+            src={`${homePageLayout.banner.blog_post.banner.url}`}
             alt=''
             width={750}
             height={500}
@@ -89,7 +89,7 @@ export default function Home({ posts, homePageLayout }: IndexProps) {
           {posts.map((post) => (
             <div className={styles.post} key={post.title}>
               <Image
-                src={`${apiUrl}${post.banner.url}`}
+                src={`${post.banner.url}`}
                 alt=''
                 width={700}
                 height={500}
