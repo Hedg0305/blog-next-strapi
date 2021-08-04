@@ -3,6 +3,10 @@ module.exports = {
 };
 module.exports = {
   images: {
-    domains: ['localhost', 'strapi-blog-apiv2.herokuapp.com'],
+    domains: [
+      'localhost',
+      'strapi-blog-apiv2.herokuapp.com',
+      'res.cloudinary.com',
+    ],
   },
 };
