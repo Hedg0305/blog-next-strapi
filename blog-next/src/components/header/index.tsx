@@ -60,12 +60,12 @@ const Header = ({ navBar }: HeaderProps) => {
             <li
               key={link.text}
               className={
-                router.asPath === `/category/${link.text.toLocaleLowerCase()}`
+                router.asPath === `/category/${link.text?.toLocaleLowerCase()}`
                   ? styles.active
                   : ''
               }
             >
-              <Link href={`/category/${link.text.toLocaleLowerCase()}`}>
+              <Link href={`/category/${link.text?.toLocaleLowerCase()}`}>
                 <a>{link.text}</a>
               </Link>
             </li>
