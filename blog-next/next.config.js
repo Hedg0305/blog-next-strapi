@@ -3,6 +3,6 @@ module.exports = {
 };
 module.exports = {
   images: {
-    domains: ['localhost'],
+    domains: ['localhost', 'strapi-blog-apiv2.herokuapp.com'],
   },
 };

@@ -111,6 +111,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       posts: data.blogPosts,
       navBar: navBar.data.navBar.nav,
     },
-    revalidate: 60 * 5,
+    revalidate: 20,
   };
 };

@@ -134,6 +134,6 @@ export const getStaticProps: GetStaticProps = async () => {
       posts: data.blogPosts,
       homePageLayout,
     },
-    revalidate: 60 * 5,
+    revalidate: 20,
   };
 };
