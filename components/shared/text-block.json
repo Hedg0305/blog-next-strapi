@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_shared_text_blocks",
+  "info": {
+    "name": "text block",
+    "icon": "ad"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "label": {
+      "type": "text"
+    }
+  }
+}

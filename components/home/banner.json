@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_home_banners",
+  "info": {
+    "name": "banner",
+    "icon": "image",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "blog_post": {
+      "model": "blog-post"
+    }
+  }
+}
